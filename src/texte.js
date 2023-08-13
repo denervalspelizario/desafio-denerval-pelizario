@@ -404,11 +404,11 @@ function calcularValorDaCompra(metodoDePagamento, itens) {
       
           function descontoTaxas(metodoDePagamento, valorTotal) {
               if (metodoDePagamento === "dinheiro") {
-                  console.log("R$ " + ((valorTotal -= valorTotal * 0.05) / 100).toFixed(2).replace('.', ','));
+                  console.log(String("R$ " + ((valorTotal -= valorTotal * 0.05) / 100).toFixed(2).replace('.', ',')));
               } else if (metodoDePagamento === "debito") {
-                  console.log("R$ " + (valorTotal / 100).toFixed(2).replace('.', ','));
+                  console.log(String("R$ " + (valorTotal / 100).toFixed(2).replace('.', ',')));
               } else if (metodoDePagamento === "credito") {
-                  console.log("R$ " + ((valorTotal += valorTotal * 0.03) / 100).toFixed(2).replace('.', ','));
+                  console.log(String("R$ " + ((valorTotal += valorTotal * 0.03) / 100).toFixed(2).replace('.', ',')));
               }
           }
       
@@ -416,8 +416,6 @@ function calcularValorDaCompra(metodoDePagamento, itens) {
       }
       
       somandoValores(metodoDePagamento, itens);
-
-      console.log(typeof somandoValores(metodoDePagamento, itens))
       
   }
 

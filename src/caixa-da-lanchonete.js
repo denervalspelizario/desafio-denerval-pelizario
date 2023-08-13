@@ -175,16 +175,20 @@ class CaixaDaLanchonete {
         
             function descontoTaxas(metodoDePagamento, valorTotal) {
                 if (metodoDePagamento === "dinheiro") {
-                    return "R$ " + ((valorTotal -= valorTotal * 0.05) / 100).toFixed(2).replace('.', ',');
+                    return String("R$ " + ((valorTotal -= valorTotal * 0.05) / 100).toFixed(2).replace('.', ','));
                 } else if (metodoDePagamento === "debito") {
-                    return "R$ " + (valorTotal / 100).toFixed(2).replace('.', ',');
+                    return String("R$ " + (valorTotal / 100).toFixed(2).replace('.', ','));
                 } else if (metodoDePagamento === "credito") {
-                    return "R$ " + ((valorTotal += valorTotal * 0.03) / 100).toFixed(2).replace('.', ',');
+                    return String("R$ " + ((valorTotal += valorTotal * 0.03) / 100).toFixed(2).replace('.', ','));
                 }
             }
         
-            descontoTaxas(tipoPagamento, valorTotal);
+            const valorFinal = descontoTaxas(tipoPagamento, valorTotal);
+            return valorFinal
         }
+        
+       
+        
 
 
         const validaCodigo = validandoCodigo(itens);
@@ -193,39 +197,37 @@ class CaixaDaLanchonete {
         const validaCombo = validandoCombo(itens);
         const validaExtra =  validandoExtra(itens); 
         const validaQtd =  validandoQuantidade(itens);
-        
+        const somaValores = somandoValores(metodoDePagamento, itens) 
 
-        if (validaPagamento !== "Forma de pagamento inválida!") { 
-          
-        } else {
-            return validaPagamento
-        }
+        if (validaPagamento) { 
+          return validaPagamento
+        } 
     
-        if(validaQtd === "Quantidade inválida!"){
-            return "Quantidade inválida!"
+        if(validaQtd){
+            return validaQtd
         }
 
         
-
-        if(validaExtra === "Item extra não pode ser pedido sem o principal"){
-            return "Item extra não pode ser pedido sem o principal" 
+        if(validaExtra){
+            return validaExtra 
         }  
         
-        if(validaCombo === "Item extra não pode ser pedido sem o principal"){
-            return "Item extra não pode ser pedido sem o principal"
+        if(validaCombo){
+            return validaCombo
         }
 
-        if(validaItem === "Não há itens no carrinho de compra!"){
-            return "Não há itens no carrinho de compra!"
-        }
-        
-        
+        if(validaItem){
+            return validaItem
+        }        
 
-        if(validaCodigo === "Item inválido!"){
-            return "Item inválido!"
+        if(validaCodigo){
+            return validaCodigo
         } 
 
-        somandoValores(metodoDePagamento, itens) 
+        if(somaValores){
+            return somaValores
+        }
+        
         
         
     }
